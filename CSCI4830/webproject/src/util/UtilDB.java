@@ -25,8 +25,10 @@ public class UtilDB {
       if (sessionFactory != null) {
          return sessionFactory;
       }
-      Configuration configuration = new Configuration().configure();
-      StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+      Configuration configuration = new Configuration();
+      configuration.configure();
+
+      StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().configure();
       sessionFactory = configuration.buildSessionFactory(builder.build());
       return sessionFactory;
    }
@@ -39,7 +41,7 @@ public class UtilDB {
 
       try {
          tx = session.beginTransaction();
-         List<?> employees = session.createQuery("FROM contacts").list();
+         List<?> employees = session.createQuery("FROM Contact").list();
          for (Iterator<?> iterator = employees.iterator(); iterator.hasNext();) {
             Contact contact = (Contact) iterator.next();
             resultList.add(contact);
@@ -65,10 +67,11 @@ public class UtilDB {
          tx = session.beginTransaction();
          System.out.println((Contact)session.get(Contact.class, 1)); // use "get" to fetch data
         // Query q = session.createQuery("FROM Employee");
-         List<?> employees = session.createQuery("FROM contacts").list();
+         List<?> employees = session.createQuery("FROM Contact").list();
          for (Iterator<?> iterator = employees.iterator(); iterator.hasNext();) {
             Contact contact = (Contact) iterator.next();
-            if (contact.getHidden() != 0 && (contact.getFname().contains(keyword) || (contact.getDname()!= null && contact.getDname().contains(keyword)))) {
+            if (contact.getHidden() == 0 && (contact.getFname().contains(keyword) || (contact.getDname()!= null && contact.getDname().contains(keyword)))) 
+            {
                resultList.add(contact);
             }
          }

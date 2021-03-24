@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 /**
  * @since J2SE-1.8
- CREATE TABLE contacts(
+ CREATE TABLE Contact(
   id INT NOT NULL AUTO_INCREMENT,
   fname VARCHAR(30) NOT NULL,
   lname VARCHAR(30) NOT NULL,
@@ -19,7 +19,7 @@ import javax.persistence.Table;
   PRIMARY KEY (id));
  */
 @Entity
-@Table(name = "contacts")
+@Table(name = "Contact")
 public class Contact {
 
    @Id  // primary key

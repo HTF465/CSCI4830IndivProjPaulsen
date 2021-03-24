@@ -42,8 +42,8 @@ public class Search extends HttpServlet implements Info {
       }
       display(listEmployees, out);
       out.println("</ul>");
-      out.println("<a href=\"/webproject/insert.html\">Search Data</a> <br>");
-      out.println("<a href=\"/webproject/edit.html\">Update Contacts</a> <br>");
+      out.println("<a href=\"/webproject/insert.html\">Create Contact</a> <br>");
+      out.println("<a href=\"/webproject/edit.html\">Update Contact</a> <br>");
       out.println("</body></html>");
    }
 
