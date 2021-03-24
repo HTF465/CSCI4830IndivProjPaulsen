@@ -9,13 +9,9 @@ import java.util.Iterator;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
-
 import datamodel.Contact;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -45,8 +41,8 @@ public class UtilDB {
          tx = session.beginTransaction();
          List<?> employees = session.createQuery("FROM Contacts").list();
          for (Iterator<?> iterator = employees.iterator(); iterator.hasNext();) {
-            Contact employee = (Contact) iterator.next();
-            resultList.add(employee);
+            Contact contact = (Contact) iterator.next();
+            resultList.add(contact);
          }
          tx.commit();
       } catch (HibernateException e) {
@@ -72,7 +68,7 @@ public class UtilDB {
          List<?> employees = session.createQuery("FROM Contacts").list();
          for (Iterator<?> iterator = employees.iterator(); iterator.hasNext();) {
             Contact contact = (Contact) iterator.next();
-            if (contact.getFname().startsWith(keyword)) {
+            if (!contact.getHidden() && (contact.getFname().contains(keyword) || (contact.getDname()!= null && contact.getDname().contains(keyword)))) {
                resultList.add(contact);
             }
          }
@@ -87,12 +83,12 @@ public class UtilDB {
       return resultList;
    }
 
-   public static void createContacts(String fName, String lName, String number, String dname, String email, String hidden) {
+   public static void createContacts(String fName, String lName, String number, String dname, String email) {
       Session session = getSessionFactory().openSession();
       Transaction tx = null;
       try {
          tx = session.beginTransaction();
-         session.save(new Contact(fName, lName, number, dname, email, hidden));
+         session.save(new Contact(fName, lName, number, dname, email));
          tx.commit();
       } catch (HibernateException e) {
          if (tx != null)

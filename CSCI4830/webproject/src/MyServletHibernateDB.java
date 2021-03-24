@@ -41,14 +41,14 @@ public class MyServletHibernateDB extends HttpServlet {
             "<h1 align=\"center\">" + title + "</h1>\n");
       out.println("<ul>");
       List<Contact> listEmployees = UtilDB.listContacts();
-      for (Contact employee : listEmployees) {
-         System.out.println("[DBG] " + employee.getId() + ", " //
-               + employee.getFname() + ", " //
-               + employee.getLname());
+      for (Contact contact : listEmployees) {
+         System.out.println("[DBG] " + contact.getId() + ", " //
+               + contact.getFname() + ", " //
+               + contact.getLname());
 
-         out.println("<li>" + employee.getId() + ", " //
-               + employee.getFname() + ", " //
-               + employee.getLname() + "</li>");
+         out.println("<li>" + contact.getId() + ", " //
+               + contact.getFname() + ", " //
+               + contact.getLname() + "</li>");
       }
       out.println("</ul>");
       out.println("</body></html>");

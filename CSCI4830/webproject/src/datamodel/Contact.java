@@ -39,7 +39,7 @@ public class Contact {
    private String email;
    
    @Column(name = "hidden")
-   private String hidden;
+   private boolean hidden;
    
   
 
@@ -48,14 +48,14 @@ public class Contact {
 		super();
 	}
 
-	public Contact(String fname, String lname, String number, String dname, String email, String hidden) {
+	public Contact(String fname, String lname, String number, String dname, String email) {
 		super();
 		this.fname = fname;
 		this.lname = lname;
 		this.number = number;
 		this.dname = dname;
 		this.email = email;
-		this.hidden = hidden;
+		this.hidden = false;
 
 	}
 
@@ -107,18 +107,34 @@ public class Contact {
 		this.email = email;
 	}
 
-	public String getHidden() {
+	public boolean getHidden() {
 		return hidden;
 	}
 
-	public void setHidden(String hidden) {
+	public void setHidden(boolean hidden) {
 		this.hidden = hidden;
 	}
 
 
 	@Override
 	public String toString() {
-		return String.format("%d %s %s: %s", id, fname, lname, number);
+		String out = "";
+		if (!hidden)
+		{
+			if ((dname == null || dname.isEmpty()) && (email == null || email.isEmpty()))
+			{
+				out = String.format("%d %s %s: %s", id, fname, lname, number);
+			}
+			else if (dname == null || dname.isEmpty())
+			{
+				out = String.format("%d %s %s: %s %s", id, fname, lname, number, email);
+			}
+			else
+			{
+				out = String.format("%d %s: %s %s", id, dname, number, email);
+			}
+		}
+		return out;
 	}
 
 

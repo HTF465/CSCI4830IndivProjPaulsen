@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +7,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import datamodel.Contact;
 import util.Info;
 import util.UtilDB;
 
-@WebServlet("/SimpleSearchHB")
-public class SimpleSearchHB extends HttpServlet implements Info {
+@WebServlet("/Insert")
+public class Insert extends HttpServlet implements Info {
    private static final long serialVersionUID = 1L;
 
-   public SimpleSearchHB() {
+   public Insert() {
       super();
    }
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String keyword = request.getParameter("keyword").trim();
+      String fName = request.getParameter("fname").trim();
+      String lName = request.getParameter("lname").trim();
+      String number = request.getParameter("number").trim();
+      String dName = request.getParameter("dname").trim();
+      String email = request.getParameter("email").trim();
+      UtilDB.createContacts(fName, lName, number, dName, email);
 
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();
@@ -33,29 +36,11 @@ public class SimpleSearchHB extends HttpServlet implements Info {
             "<body bgcolor=\"#f0f0f0\">\n" + //
             "<h1 align=\"center\">" + title + "</h1>\n");
       out.println("<ul>");
-
-      List<Contact> listEmployees = null;
-      if (keyword != null && !keyword.isEmpty()) {
-         listEmployees = UtilDB.listContacts(keyword);
-      } else {
-         listEmployees = UtilDB.listContacts();
-      }
-      display(listEmployees, out);
+      out.println("<li> First Name: " + fName);
+      out.println("<li> Last Name: " + lName);
       out.println("</ul>");
       out.println("<a href=/" + projectName + "/" + searchWebName + ">Search Data</a> <br>");
       out.println("</body></html>");
-   }
-
-   void display(List<Contact> listEmployees, PrintWriter out) {
-      for (Contact employee : listEmployees) {
-         System.out.println("[DBG] " + employee.getId() + ", " //
-               + employee.getFname() + ", " //
-               + employee.getLname());
-
-         out.println("<li>" + employee.getId() + ", " //
-               + employee.getFname() + ", " //
-               + employee.getLname() + "</li>");
-      }
    }
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
