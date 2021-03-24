@@ -39,7 +39,7 @@ public class UtilDB {
 
       try {
          tx = session.beginTransaction();
-         List<?> employees = session.createQuery("FROM Contacts").list();
+         List<?> employees = session.createQuery("FROM contacts").list();
          for (Iterator<?> iterator = employees.iterator(); iterator.hasNext();) {
             Contact contact = (Contact) iterator.next();
             resultList.add(contact);
@@ -65,7 +65,7 @@ public class UtilDB {
          tx = session.beginTransaction();
          System.out.println((Contact)session.get(Contact.class, 1)); // use "get" to fetch data
         // Query q = session.createQuery("FROM Employee");
-         List<?> employees = session.createQuery("FROM Contacts").list();
+         List<?> employees = session.createQuery("FROM contacts").list();
          for (Iterator<?> iterator = employees.iterator(); iterator.hasNext();) {
             Contact contact = (Contact) iterator.next();
             if (contact.getHidden() != 0 && (contact.getFname().contains(keyword) || (contact.getDname()!= null && contact.getDname().contains(keyword)))) {

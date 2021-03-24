@@ -45,7 +45,8 @@ public class Edit extends HttpServlet implements Info {
       out.println("<li> Display Name: " + dName);
       out.println("<li> Email: " + email);
       out.println("</ul>");
-      out.println("<a href=/" + projectName + "/" + searchWebName + ">Search Data</a> <br>");
+      out.println("<a href=\"/webproject/search.html\">Search Data</a> <br>");
+      out.println("<a href=\"/webproject/insert.html\">Create Contact</a> <br>");
       out.println("</body></html>");
    }
 

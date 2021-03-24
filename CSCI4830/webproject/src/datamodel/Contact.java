@@ -8,18 +8,18 @@ import javax.persistence.Table;
 
 /**
  * @since J2SE-1.8
- CREATE TABLE employee (
-  id INT NOT NULL AUTO_INCREMENT,    
-  fname VARCHAR(30) NOT NULL,   
-  lname VARCHAR(30) NOT NULL, 
+ CREATE TABLE contacts(
+  id INT NOT NULL AUTO_INCREMENT,
+  fname VARCHAR(30) NOT NULL,
+  lname VARCHAR(30) NOT NULL,
   number int NOT NULL,
-  dname VARCHAR(30),  
-  email VARCHAR(30), 
+  dname VARCHAR(30),
+  email VARCHAR(30),
   hidden int NOT NULL,
   PRIMARY KEY (id));
  */
 @Entity
-@Table(name = "employee")
+@Table(name = "contacts")
 public class Contact {
 
    @Id  // primary key
