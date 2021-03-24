@@ -38,6 +38,9 @@ public class Insert extends HttpServlet implements Info {
       out.println("<ul>");
       out.println("<li> First Name: " + fName);
       out.println("<li> Last Name: " + lName);
+      out.println("<li> Phone Number: " + number);
+      out.println("<li> Display Name: " + dName);
+      out.println("<li> Email: " + email);
       out.println("</ul>");
       out.println("<a href=/" + projectName + "/" + searchWebName + ">Search Data</a> <br>");
       out.println("</body></html>");

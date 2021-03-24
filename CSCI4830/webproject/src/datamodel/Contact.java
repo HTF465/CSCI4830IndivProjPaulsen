@@ -10,8 +10,12 @@ import javax.persistence.Table;
  * @since J2SE-1.8
  CREATE TABLE employee (
   id INT NOT NULL AUTO_INCREMENT,    
-  name VARCHAR(30) NOT NULL,   
-  age INT NOT NULL,    
+  fname VARCHAR(30) NOT NULL,   
+  lname VARCHAR(30) NOT NULL, 
+  number int NOT NULL,
+  dname VARCHAR(30),  
+  email VARCHAR(30), 
+  hidden int NOT NULL,
   PRIMARY KEY (id));
  */
 @Entity
@@ -39,7 +43,7 @@ public class Contact {
    private String email;
    
    @Column(name = "hidden")
-   private boolean hidden;
+   private int hidden;
    
   
 
@@ -55,8 +59,19 @@ public class Contact {
 		this.number = number;
 		this.dname = dname;
 		this.email = email;
-		this.hidden = false;
+		this.hidden = 0;
 
+	}
+	
+	public Contact(int id, String fname, String lname, String number, String dname, String email, int hidden) {
+		super();
+		this.id = id;
+		this.fname = fname;
+		this.lname = lname;
+		this.number = number;
+		this.dname = dname;
+		this.email = email;
+		this.hidden = hidden;
 	}
 
 	public Integer getId() {
@@ -107,11 +122,11 @@ public class Contact {
 		this.email = email;
 	}
 
-	public boolean getHidden() {
+	public int getHidden() {
 		return hidden;
 	}
 
-	public void setHidden(boolean hidden) {
+	public void setHidden(int hidden) {
 		this.hidden = hidden;
 	}
 
@@ -119,7 +134,7 @@ public class Contact {
 	@Override
 	public String toString() {
 		String out = "";
-		if (!hidden)
+		if (hidden != 0)
 		{
 			if ((dname == null || dname.isEmpty()) && (email == null || email.isEmpty()))
 			{

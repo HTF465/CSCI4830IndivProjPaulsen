@@ -68,7 +68,7 @@ public class UtilDB {
          List<?> employees = session.createQuery("FROM Contacts").list();
          for (Iterator<?> iterator = employees.iterator(); iterator.hasNext();) {
             Contact contact = (Contact) iterator.next();
-            if (!contact.getHidden() && (contact.getFname().contains(keyword) || (contact.getDname()!= null && contact.getDname().contains(keyword)))) {
+            if (contact.getHidden() != 0 && (contact.getFname().contains(keyword) || (contact.getDname()!= null && contact.getDname().contains(keyword)))) {
                resultList.add(contact);
             }
          }
@@ -82,6 +82,22 @@ public class UtilDB {
       }
       return resultList;
    }
+   
+   public static void updateContacts(int id, String fName, String lName, String number, String dname, String email, int hidden) {
+	      Session session = getSessionFactory().openSession();
+	      Transaction tx = null;
+	      try {
+	         tx = session.beginTransaction();
+	         session.update((new Contact(id, fName, lName, number, dname, email, hidden)));
+	         tx.commit();
+	      } catch (HibernateException e) {
+	         if (tx != null)
+	            tx.rollback();
+	         e.printStackTrace();
+	      } finally {
+	         session.close();
+	      }
+	   }
 
    public static void createContacts(String fName, String lName, String number, String dname, String email) {
       Session session = getSessionFactory().openSession();
