@@ -134,7 +134,7 @@ public class Contact {
 	@Override
 	public String toString() {
 		String out = "";
-		if (hidden != 0)
+		if (hidden == 0)
 		{
 			if ((dname == null || dname.isEmpty()) && (email == null || email.isEmpty()))
 			{

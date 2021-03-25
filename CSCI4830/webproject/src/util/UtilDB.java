@@ -72,6 +72,7 @@ public class UtilDB {
             Contact contact = (Contact) iterator.next();
             if (contact.getHidden() == 0 && (contact.getFname().contains(keyword) || (contact.getDname()!= null && contact.getDname().contains(keyword)))) 
             {
+//            	System.out.println("test " + contact.toString());
                resultList.add(contact);
             }
          }

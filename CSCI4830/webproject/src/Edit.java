@@ -25,7 +25,13 @@ public class Edit extends HttpServlet implements Info {
       String number = request.getParameter("number").trim();
       String dName = request.getParameter("dname").trim();
       String email = request.getParameter("email").trim();
-      int hidden = Integer.parseInt(request.getParameter("hidden"));
+      String button = request.getParameter("hidden");
+      int hidden = 0;
+      
+      if (button != null && button.equals("on"))
+	  {
+    	  hidden = 1;
+	  }
       UtilDB.updateContacts(id, fName, lName, number, dName, email, hidden);
 
       response.setContentType("text/html");
